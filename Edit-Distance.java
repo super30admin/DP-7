@@ -9,7 +9,7 @@ class Solution {
             dp[i][0] = i;
         }
         for(int i=1;i<=dp[0].length-1;i++) {
-            dp[0][i] = 1;
+            dp[0][i] = i;
         }
         for(int i=0;i<dp.length-1;i++) {
             for(int j=0;j<dp[0].length-1;j++) {
