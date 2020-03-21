@@ -1,6 +1,6 @@
 # DP-7
 
-## Problem1 Edit Distance (https://leetcode.com/problems/edit-distance/)
+## Problem148 Edit Distance (https://leetcode.com/problems/edit-distance/)
 Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
 
 You have the following 3 operations permitted on a word:
@@ -43,7 +43,7 @@ exention -> exection (replace 'n' with 'c')
 
 exection -> execution (insert 'u')
 
-## Problem2 Regular Expression Matching (https://leetcode.com/problems/regular-expression-matching/)
+## Problem149 Regular Expression Matching (https://leetcode.com/problems/regular-expression-matching/)
 
 Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
 
