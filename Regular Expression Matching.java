@@ -1,6 +1,6 @@
 // Time Complexity :o(mn)
 // Space Complexity :o(mn)
-// Did this code successfully run on Leetcode :no
+// Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this :
 
 
@@ -20,8 +20,8 @@ class Solution {
         }
         
         
-        for(int i=0;i<=p.length();i++){
-        System.out.println(dp[1][i]);}
+        // for(int i=0;i<=p.length();i++){
+        // System.out.println(dp[1][i]);}
         
         for(int n=1;n<=s.length();n++){
             dp[n][0]=false;
