@@ -1,3 +1,8 @@
+
+// Time Complexity : O(nxm)
+// Space Complexity :O(nxm)
+// Did this code successfully run on Leetcode : Yes 
+// Any problem you faced while coding this :No
 class Solution {
     public boolean isMatch(String s, String p) {
         int m  = s.length();
