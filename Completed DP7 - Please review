@@ -1,0 +1,80 @@
+PROBLEM 1 -
+// Time Complexity :O(mn)
+ // Space Complexity :O(max(m,n)) 
+ // Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    func minDistance(_ word1: String, _ word2: String) -> Int {
+        let m = word1.count
+        let n = word2.count
+        var dp = [[Int]](repeating: [Int](repeating: 0, count: n+1), count: m+1)
+        for i in stride(from: 1, through: m, by: 1) {
+            dp[i][0] = i
+        }
+        for i in stride(from: 1, through: n, by: 1) {
+            dp[0][i] = i
+        }
+        var tmp = 0
+        for i in stride(from: 1, through: m, by: 1) {
+            for j in stride(from: 1, through: n, by: 1) {
+                if word1[i-1] == word2[j-1] {
+                    dp[i][j] = dp[i-1][j-1]
+                } else {
+                    tmp = min(dp[i-1][j-1], min(dp[i][j-1], dp[i-1][j]))
+                    dp[i][j] = tmp + 1
+                }
+            }
+        }
+        return dp[m][n]
+    }
+}
+
+extension String {
+    subscript (i: Int) -> String {
+        let idx = index(startIndex, offsetBy: i)
+        return String(self[idx])
+    }
+}
+
+
+PROBLEM 2 -
+// Time Complexity :O(TP) t= length of text P = pattern
+ // Space Complexity :O(TP)) 
+ // Did this code successfully run on Leetcode :Yes
+
+
+class Solution {
+    func isMatch(_ s: String, _ p: String) -> Bool {
+        let s = Array(s), p = Array(p)
+        var rec: [[Bool]] = Array(repeating: Array(repeating: false, count: p.count + 1), count: s.count + 1)
+        
+        rec[0][0] = true
+        for i in 0..<p.count {
+            if p[i] == "*" {
+                rec[0][i + 1] = rec[0][i - 1]
+            }
+        }
+        
+        for i in 0..<s.count {
+            for j in 0..<p.count {
+                if p[j] != "*" {
+                    if rec[i][j] {
+                        if p[j] == "." || p[j] == s[i] {
+                            rec[i + 1][j + 1] = true
+                        }
+                    }
+                } else {
+                    if rec[i + 1][j - 1] {
+                        rec[i + 1][j + 1] = true
+                    } else if rec[i][j - 1] || rec[i][j + 1] {
+                        if p[j - 1] == s[i] || p[j - 1] == "."   {
+                            rec[i + 1][j + 1] = true
+                        }
+                    }
+                }
+            }
+        }
+
+        return rec[s.count][p.count]
+    }
+}
