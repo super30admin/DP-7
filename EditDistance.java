@@ -9,6 +9,7 @@
  *           o 2 2 1 2 3 4
  *           s 3 3 2 2 2 3
  *  Time: O(m*n) m and n - are the lengths of word1 and word2 respectively
+ *  Space: O(m*n)
  */
 class Solution {
     public int minDistance(String word1, String word2) {
