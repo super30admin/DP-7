@@ -9,7 +9,13 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
+                    A) Create DP Matrix of n rows and m columns.
+                    B) First populate the row and assign value of j to it.
+                    C) Populate column, assign value of i to it.
+                    D) Now DP, 2 for loops starting from 1.
+                       if word1 charscters is equal to the word2 character then get the value from its diagonal.
+                    E) If not, thentake the min of diagonal, left and value from upper row.
+                    F) At the end, return last dp[n-1][m-1].
     */  
 
 class Solution {

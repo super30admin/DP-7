@@ -9,7 +9,12 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
+                    A) Create DP Matrix of n rows and m columns.
+                    B) First populate the row and if it has '*' then dp[0][j] = dp[0][j-2];
+                    D) Now DP, 2 for loops starting from 1.
+                       if p charscters is equal to the s character or if p has '.' then get the value from its diagonal.
+                    E) If not, then take check if it has '*' then do the extra check and assign true if (dp[i][j-2] || dp[i-1][j])
+                    F) At the end, return last dp[n-1][m-1].
     */  
 
 class Solution {
