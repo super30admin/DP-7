@@ -6,7 +6,7 @@ class Solution:
         dp[0][0] = True
 
         for i in range(1,len(dp[0])):
-            if i >1 and p[i-1] == '*':
+            if  p[i-1] == '*':
                 dp[0][i] = dp[0][i-2]
 
         for i in range(1, len(dp)):
