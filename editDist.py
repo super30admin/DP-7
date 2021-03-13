@@ -1,5 +1,7 @@
 class Solution:
     
+class Solution:
+    
     """
     Description: find minimum number of operations to convert word1 to word2 (3 operations allowed: insert, delete or replace a character)
     
@@ -18,18 +20,19 @@ class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         
         m = len(word2); n = len(word1)
+        if n == 0: return len(word2)
         dp = [j for j in range(n + 1)]
-        
         for i in range(1, m + 1):
             temp1 = dp[0];
             dp[0] = i
             for j in range(1, n + 1):
                 temp2 = dp[j]
-                if word2[i - 1] == word1[j - 1]:
+                if word1[j - 1] == word2[i - 1]:
                     dp[j] = temp1
                 else:
-                    dp[j] = min(temp1, dp[j - 1], dp[j]) + 1
+                    dp[j] = min(temp1, min(dp[j - 1], temp2)) + 1
                     
-            temp1 = temp2
-            
+                temp1 = temp2
+
         return dp[-1]
+
