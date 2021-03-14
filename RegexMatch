@@ -1,0 +1,45 @@
+/**
+* Time complexity = O(m*n)
+* Space = O(m*n)
+*/
+
+class Solution {
+    public boolean isMatch(String s, String p) {        
+        int slen=s.length();
+        int plen=p.length();        
+        boolean[][] dp=new boolean[slen+1][plen+1];
+        //set dp[0][0] to true as empty string always match
+        dp[0][0]=true;
+        
+        //set for 0th row
+        for(int i=1; i<=plen;i++){
+            if(p.charAt(i-1)=='*'){
+                dp[0][i]=dp[0][i-2];
+            }
+        }
+        
+        //for remaing rows
+        for(int i=1 ;i<=slen ;i++){
+            for(int j=1 ;j<=plen;j++){
+                //for characters other than *
+                if(p.charAt(j-1) !='*'){
+                    if(p.charAt(j-1) == s.charAt(i-1) || p.charAt(j-1)=='.'){
+                        dp[i][j]=dp[i-1][j-1];
+                    }
+                }else{
+                    // repeat 0 times before *
+                    dp[i][j]=dp[i][j-2];
+                    
+                    //repeat 1 time before *
+                    if(p.charAt(j-2) == s.charAt(i-1) || p.charAt(j-2)=='.'){
+                        if(dp[i-1][j]){
+                          dp[i][j]=true;  
+                        }
+                    }
+                }
+            }
+        }
+        
+        return dp[slen][plen];
+    }
+}
