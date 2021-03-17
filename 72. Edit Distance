@@ -1,0 +1,33 @@
+class Solution:
+    
+    def fun(self, word1, word2, m, n, dp):
+        # if the first string is completely processed, return the number of 
+        #characters remained in second string
+        if(m == 0):
+            return n;
+        # if the second string is completely processed, return the number of characters 
+        #remained in first string
+        if(n== 0):
+            return m;
+        
+        if(dp[m][n] != -1):
+            return dp[m][n];
+        
+        # if characters at positions m and n are equal, 
+        # then just decrement m and n by 1
+        if(word1[m-1] == word2[n-1]):
+            dp[m][n] = self.fun(word1, word2, m-1, n-1, dp);
+            return dp[m][n];
+        
+        dp[m][n] = min(1 + self.fun(word1, word2, m, n-1, dp), 1 + self.fun(word1, word2, m-1, n, dp), 1 + self.fun(word1, word2, m-1, n-1, dp) );
+        return dp[m][n];
+        
+    
+    
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2);
+        dp= [[-1]*(n+1) for i in range(m+1)];
+        
+        return self.fun(word1, word2, m, n, dp);
+        
+        
