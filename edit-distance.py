@@ -1,4 +1,5 @@
 class Solution:
+    # Time, Space: O(n^2)
     def minDistance(self, word1: str, word2: str) -> int:
         dp = [[0 for i in range(0,len(word2)+1)] for j in range(0,len(word1)+1)]
         dp[0][0] = 0
