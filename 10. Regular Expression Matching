@@ -1,0 +1,88 @@
+class Solution:
+    
+    def fun(self, i, j, s, p, prev):
+        #print(i,j)
+        if( (i == len(s) and j == len(p)) or (i == len(s) and j == len(p) -1 and p[j] == '*')):
+            return True;
+        if(i >= len(s) or j >= len(p)):
+            return False;
+        
+        # case - 1
+        if(p[j] == '*'):
+            
+            # option - 1 consider
+            if(s[i] == prev or prev == '.'):
+                if( self.fun(i+1, j, s, p, prev) ):
+                    return True;
+            
+            # option - 2 don't consider            
+            if( self.fun(i, j + 1, s, p, prev) ):
+                return True;               
+            
+        # case - 2
+        elif(p[j] == '.'):
+            if(self.fun(i + 1, j + 1, s, p, p[j])):
+                return True;  
+        #case - 3
+        else:
+            
+            #option1 consider
+            if(s[i] == p[j]):
+                if(self.fun(i+1, j + 1, s, p, p[j])):
+                    return True;
+            else:
+                if( j < len(p) and ( p[j+1] == '*') ):
+                    if(self.fun(i, j + 2, s, p, prev)):
+                        return True;
+                 
+        
+        return False;
+            
+            
+    
+    
+    def isMatch(self, s: str, p: str) -> bool:
+        
+        s = ' ' + s;
+        p = ' ' + p;
+        m,n = len(s), len(p);
+        
+        dp = [[False]*(n+1) for i in range(m+ 1)];
+        dp[0][0] = True;
+        
+        for i in range(m):
+            for j in range(n):
+                # case1
+                if(i == 0 and s[i] == p[j]):
+                    dp[i][j] = True;
+                # characters in s and p are equal, consider i-1, j-1
+                elif(j > 0 and s[i] == p[j]):
+                    dp[i][j] = dp[i-1][j-1];
+                #case - 2
+                elif(p[j] == '*'):
+                    #case1 0
+                    dp[i][j] = dp[i][j] or dp[i][j-2];
+                    
+                    # case2 1 current character at s is equal to previous character in pattern
+                    # or previous character is equal to '.'
+                    if(p[j-1] == s[i] or p[j-1] == '.'):
+                        dp[i][j] = dp[i][j] or dp[i-1][j];  
+                # case 3  if the character in the pattern is equal to '.'
+                elif(p[j] == '.'):
+                    dp[i][j] = dp[i-1][j-1];
+        #print(dp);
+        return dp[m-1][n-1];
+    '''
+    time complexity = O(mn)
+    space complexity = O(mn)
+    
+    '''
+                    
+                
+                
+                    
+            
+        
+        
+        
+        
