@@ -1,5 +1,5 @@
 //Time complexity - O(m*n)
-//Space Complexity - O(m*n)
+//Space Complexity - O(n)
 
 class Solution {
     public int minDistance(String word1, String word2) {
