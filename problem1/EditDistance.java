@@ -1,5 +1,5 @@
-// Time Complexity : 
-// Space Complexity : 
+// Time Complexity : O(m * n), m -> Length of word 1
+// Space Complexity : O(m * n), n -> Length of word 2
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 package problem1;
