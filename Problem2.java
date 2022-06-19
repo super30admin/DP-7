@@ -2,7 +2,6 @@ import java.util.Arrays;
 
 public class Problem2 {
     // recursion solution
-    // TC : O()
     public boolean isMatch(String s, String p) {
         if (p == null || p.length() == 0) return s.isEmpty();
         boolean firstMatch = (!s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.'));
