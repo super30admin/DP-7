@@ -29,9 +29,25 @@ class Solution {
                 if (word1.charAt(i-1) == word2.charAt(j-1)) {
                     dp[i][j] = dp[i-1][j-1];
                 } else {
-                    // dp[i-1][j] -> replace
-                    // dp[i-1][j-1] -> delete
-                    // dp[i][j-1] -> insert
+                    /**
+                      _ r o s
+                    _ 0 1 2 3
+                    h 1
+                    o 2
+                    r 3
+                    s 4
+                    e 5
+
+                    _h = _r ?
+
+                    Case 1: delete => _ = _r ? => matrix[_][_r] = 1
+                    Case 2: Add => _hr = _r ? delete r => _h = _ ? => matrix[_h][_]
+                    Case 3: Update => _h = _r ? matrix[_][_] + 1 to convert h to r
+
+                    dp[i-1][j] -> delete
+                    dp[i-1][j-1] -> update
+                    dp[i][j-1] -> add
+                    **/
                     dp[i][j] = 1 + Math.min(dp[i-1][j], Math.min(dp[i-1][j-1], dp[i][j-1]));
                 }
             }
