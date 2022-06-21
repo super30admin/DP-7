@@ -4,6 +4,8 @@ O(n1 * n2)
 */
 class Solution {
     public int minDistance(String word1, String word2) {
+        if (word1.equals(word2))
+            return 0;
         int n1 = word1.length();
         int n2 = word2.length();
         
@@ -54,5 +56,46 @@ class Solution {
         }
         
         return dp[n1][n2];
+    }
+}
+
+// Can optimize on space by using a single array
+class Solution {
+    public int minDistance(String word1, String word2) {
+        if (word1.equals(word2))
+            return 0;
+        int n1 = word1.length();
+        int n2 = word2.length();
+        
+        if (n1 == 0 && n2 == 0) return 0;
+        
+        if (n1 == 0) return n2;
+        if (n2 == 0) return n1;
+        
+        if (n1 > n2)
+            return minDistance(word2, word1);
+        
+        int dp[] = new int[n1 + 1];
+        
+        for (int i = 0; i <= n1; ++i) {
+            dp[i] = i;
+        }
+        
+        
+        for (int i = 1; i <= n2; ++i) {
+            int prev = dp[0];
+            dp[0] = i;
+            for (int j = 1; j <= n1; ++j) {
+                int temp = dp[j];
+                if (word2.charAt(i-1) == word1.charAt(j-1)) {
+                    dp[j] = prev;
+                } else {
+                    dp[j] = 1 + Math.min(prev, Math.min(dp[j-1], dp[j]));
+                }
+                prev = temp;
+            }
+        }
+        
+        return dp[n1];
     }
 }
