@@ -32,7 +32,7 @@ class Solution {
                     /**
                       _ r o s
                     _ 0 1 2 3
-                    h 1
+                    h 1 ?
                     o 2
                     r 3
                     s 4
