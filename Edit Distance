@@ -1,0 +1,17 @@
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        a = [0]+list(range(1,len(word2)+1))
+        for i in range(len(word1)):
+            b = a.copy()
+            b[0] = i+1
+            for j in range(len(word2)):
+                if word1[i] != word2[j]:
+                    b[j+1] = 1 + min(b[j],a[j+1],a[j])
+                else:
+                    b[j+1] = a[j]
+            a = b
+        return a[-1]
+    
+# Time Complexity: O(mn)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
