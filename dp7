@@ -1,0 +1,50 @@
+Edit Distance
+#tc: O(m*n)
+#sc: O(n)
+class Solution:
+    def minDistance(self, s1: str, s2: str) -> int:
+        m, n = len(s1), len(s2)
+        dp, dpPrev = [-1] * (n+1), [-1] * (n+1)
+        for i in range(m+1):
+            for j in range(n+1):
+                if i == 0:
+                    dp[j] = j  # Need to insert `j` chars to become s2[:j]
+                elif j == 0:
+                    dp[j] = i  # Need to delete `i` chars to become ""
+                elif s1[i-1] == s2[j-1]:
+                    dp[j] = dpPrev[j-1]
+                else:
+                    dp[j] = min(dpPrev[j], dp[j-1], dpPrev[j-1]) + 1
+            dp, dpPrev = dpPrev, dp
+        return dpPrev[n]
+Regular Expression Matching
+#tc: O(mn)
+#sc: O(n)
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        s_len, p_len = len(s), len(p)
+        memcache = {}
+
+        def isMatchHelper(s_idx, p_idx):
+            if s_idx >= s_len and p_idx >= p_len:
+                return True
+            if p_idx >= p_len:
+                return False
+            if (s_idx, p_idx) in memcache:
+                return memcache[(s_idx, p_idx)]
+
+            is_match = s_idx < s_len and (s[s_idx] == p[p_idx] or p[p_idx] == ".")
+            if p_idx + 1 < p_len and p[p_idx + 1] == "*":
+                # * Either don't use "*" -> (s_idx, p_idx + 2) or use "*" -> (s_idx + 1, p_idx).
+                memcache[(s_idx, p_idx)] = isMatchHelper(s_idx, p_idx + 2) or (
+                    is_match and isMatchHelper(s_idx + 1, p_idx)
+                )
+            # * If both chars match.
+            elif is_match:
+                memcache[(s_idx, p_idx)] = isMatchHelper(s_idx + 1, p_idx + 1)
+            else:
+                memcache[(s_idx, p_idx)] = False
+
+            return memcache[(s_idx, p_idx)]
+
+        return isMatchHelper(0, 0)
